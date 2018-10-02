@@ -1,0 +1,15 @@
+{
+    "customConfiguration": {
+        "orgData": {
+            "orgName": "SE-Design",
+            "displayName": "Documentation Demo",
+            "displayTag": "Demo documentation v1",
+            "displayImage": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Swagger-logo.png"
+        },
+        "colorPalette": {
+            "colorOne": "",
+            "colorTwo": "",
+            "colorThree": ""
+        }
+    }
+}
