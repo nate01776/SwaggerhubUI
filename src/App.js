@@ -28,6 +28,7 @@ class App extends Component {
     SwaggerUI({
       domNode: document.getElementById('docs'),
       layout: "BaseLayout",
+      docExpansion: ["none"],
       url: this.state.apiData
     });
   }
