@@ -29,6 +29,8 @@ const Sidebar = props => {
         <h4>This should support .md</h4>
         <h3 className="side-bar-title">API DOCS</h3>
         {APILinks}
+        <h3>SANDBOX</h3>
+        <h4>workflows against virt</h4>
       </div>
     </div>
   )

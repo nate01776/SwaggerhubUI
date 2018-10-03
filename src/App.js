@@ -71,6 +71,9 @@ class App extends Component {
   }
 
   render() {
+    // let list = document.getComponent("operations", true)
+    // console.log(list)
+
     let orgName = this.state.orgData.orgName
     let displayImage = this.state.orgData.displayImage
 

@@ -7,7 +7,7 @@
 }
 
 .App-header {
-  background-color: #222;
+  background-color: black;
   height: 10vh;
   /* padding: 20px; */
   color: white;
@@ -42,6 +42,65 @@
   width: 85vw;
   padding-left: 30px;
   background-color: slategray;
+}
+
+.information-container {
+  margin-bottom: 30px;
+  max-width: 40vw;
+  background-color: white;
+  padding: 30px;
+  font-family: 'Niramit', sans-serif;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1), 0 2px 5px rgba(0,0,0,0.2);
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.schemes {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  font-family: 'Niramit', sans-serif;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1), 0 2px 5px rgba(0,0,0,0.2);
+  padding: 30px;
+  max-width: 30vw;
+  border-radius: 5px;
+}
+
+.schemes-title {
+  margin-right: 10px;
+  font-weight: bolder;
+}
+
+.schemes select {
+  padding: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 10px;
+  font-family: 'Niramit', sans-serif;
+}
+
+.auth-wrapper {
+  margin-left: 30px;
+}
+
+.authorize {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: darkslateblue;
+  border: 2px solid darkslateblue;
+  border-radius: 150px;
+  color: whitesmoke;
+  padding: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1), 0 2px 5px rgba(0,0,0,0.2);
+  font-family: 'Niramit', sans-serif;
+  font-weight: bolder;
+  letter-spacing: .1em;
+  padding-left: 15px;
+  padding-right: 15px;
+  cursor: pointer;
 }
 
 .api-link {
@@ -230,14 +289,15 @@
 
 .opblock-section .highlight-code {
   /* min-width: 500px; */
-  max-width: 100%;
+  max-width: 30vw;
   border: 1px solid black;
-  padding: 10px;
+  padding: 30px;
   color: whitesmoke;
   background-color: #111111;
   font-family: 'Cutive Mono', monospace;
   overflow-x: scroll;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1), 0 2px 5px rgba(0,0,0,0.2);
+  border-radius: 10px;
 }
 
 .responses-wrapper {
@@ -248,15 +308,16 @@
 
 .responses-wrapper .highlight-code {
   margin-right: 10px;
-  max-width: 100%;
+  width: 35vw;
   border: 1px solid black;
-  padding: 10px;
+  padding: 30px;
   color: whitesmoke;
   background-color: #111111;
   font-family: 'Cutive Mono', monospace;
   overflow-x: scroll;
   overflow-wrap: break-word;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1), 0 2px 5px rgba(0,0,0,0.2);
+  border-radius: 10px;
 }
 
 .highlight-code span {
@@ -291,12 +352,16 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: slategray; 
+  background: slategray;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: whitesmoke; 
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 /* Handle on hover */
