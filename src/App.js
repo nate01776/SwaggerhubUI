@@ -86,6 +86,9 @@ class App extends Component {
           <div>
             <div id="docs"></div>
           </div>
+          <div>
+            "powered by swaggerhub"
+            </div>
         </div>
       </div>
     );
