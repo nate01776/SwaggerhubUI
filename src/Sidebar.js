@@ -5,6 +5,8 @@ import APILink from './APILink.js'
 const Sidebar = props => {
   let orgData = props.orgData;
   let orgAPIData = props.orgAPIData;
+  let orgName = orgData.orgName
+  let displayImage = orgData.displayImage
   
   let APILinks = [];
 
@@ -24,6 +26,10 @@ const Sidebar = props => {
 
   return (
     <div className="sidebar">
+      <header className="App-header">
+          <img src={displayImage} className="App-logo" alt="logo" />
+          <h1 className="App-title">{orgName}</h1>
+      </header>
       <div className="side-bar-body">
         <h3 className="side-bar-title">TUTORIALS</h3>
         <h4>This should support .md</h4>

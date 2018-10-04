@@ -74,15 +74,8 @@ class App extends Component {
     // let list = document.getComponent("operations", true)
     // console.log(list)
 
-    let orgName = this.state.orgData.orgName
-    let displayImage = this.state.orgData.displayImage
-
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={displayImage} className="App-logo" alt="logo" />
-          <h1 className="App-title">{orgName}</h1>
-        </header>
         <div className="page-body">
           <Sidebar
             orgData={this.state.orgData}
