@@ -71,9 +71,6 @@ class App extends Component {
   }
 
   render() {
-    // let list = document.getComponent("operations", true)
-    // console.log(list)
-
     return (
       <div className="App">
         <div className="page-body">
@@ -86,9 +83,6 @@ class App extends Component {
           <div>
             <div id="docs"></div>
           </div>
-          <div>
-            "powered by swaggerhub"
-            </div>
         </div>
       </div>
     );

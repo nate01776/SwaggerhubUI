@@ -38,6 +38,9 @@ const Sidebar = props => {
         <h3>SANDBOX</h3>
         <h4>workflows against virt</h4>
       </div>
+      <div className="side-bar-footer">
+        <h4>Powered by Swaggerhub</h4>
+      </div>
     </div>
   )
 }

@@ -49,6 +49,15 @@
   overflow-y: scroll;
 }
 
+.side-bar-footer {
+  background-color: green;
+  padding: 5px;
+}
+
+.side-bar-footer h4 {
+  margin: 0;
+}
+
 #docs {
   display: flex;
   flex-direction: row;
