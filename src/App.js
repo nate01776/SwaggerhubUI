@@ -80,7 +80,7 @@ class App extends Component {
             getOrganizationData={this.getOrganizationData}
             getAPIData={this.getAPIData}
           />
-          <div>
+          <div className="docs-container">
             <div id="docs"></div>
           </div>
         </div>
