@@ -2,15 +2,16 @@ import React from 'react';
 // import './APILink.css'
 
 const TutorialLink = props => {
-    let name = props.linkName
+    let displayName = props.displayName
+    let resource = props.resource
 
   function handleClick() {
-    props.getStaticFile(name)
+    props.getStaticFile(resource)
   }
 
   return (  
     <div className="api-link" onClick={() => handleClick()}>
-      {name}
+      {displayName}
     </div>
   )
 }

@@ -1,27 +1,25 @@
 import React from 'react';
-// import dir from 'node-dir';
-// import './Sidebar.css';
-import APILink from './Elements/APILink.js'
-import TutorialLink from './TutorialLink.js'
+import APILink from '../Elements/APILink.js'
+import TutorialLink from '../Elements/TutorialLink.js'
 
 const Sidebar = props => {
   let orgData = props.orgData;
-  let orgAPIData = props.orgAPIData;
+  let orgAPIList = props.orgAPIList;
   let orgName = orgData.orgName
   let displayImage = orgData.displayImage
-  let tutorialList = ['How It Works', 'link 2']
+  let tutorialList = props.linkList
   
   let APILinks = [];
   let tutorialLinks = [];
 
-  if (orgAPIData === null) {
+  if (orgAPIList === null) {
     props.getOrganizationData(orgData.orgName)
   } else {
-    for (let i=0; i < orgAPIData.length; i++) {
+    for (let i=0; i < orgAPIList.length; i++) {
       APILinks.push(
         <APILink 
           key={i}
-          orgAPIData={props.orgAPIData[i]}
+          orgAPIData={props.orgAPIList[i]}
           getAPIData={props.getAPIData}
         />
       )
@@ -32,7 +30,8 @@ const Sidebar = props => {
     tutorialLinks.push(
       <TutorialLink 
         key={n}
-        linkName={tutorialList[n]}
+        displayName={tutorialList[n].displayName}
+        resource={tutorialList[n].resource}
         getStaticFile={props.getStaticFile}
       />
     )
@@ -50,8 +49,6 @@ const Sidebar = props => {
         <h3 className="side-bar-title">API DOCS</h3>
         {APILinks}
         <h3 className="side-bar-title">SANDBOX</h3>
-        <h4 className="api-link">Authenticating</h4>
-        <h4 className="api-link">Getting User Data</h4>
       </div>
       <div className="side-bar-footer">
         <h4><a href="http://app.swaggerhub.com">POWERED BY SWAGGERHUB</a></h4>

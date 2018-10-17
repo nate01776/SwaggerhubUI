@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SwaggerUI from 'swagger-ui';
 import ReactMarkdown from 'react-markdown';
 import Config from './Resources/config.json';
-import Sidebar from './Sidebar.js';
+import Sidebar from './Components/Sidebar';
 import './App.css';
 
 class App extends Component {
@@ -11,9 +11,10 @@ class App extends Component {
     this.state = {
       isDefinition: false,
       orgData: null,
-      orgAPIData: null,
+      linkList: null,
+      orgAPIList: null,
       apiData: null,
-      tutorialText: null
+      linkData: null
     }
     this.swaggerhub = this.swaggerhub.bind(this)
     this.getOrganizationData = this.getOrganizationData.bind(this)
@@ -23,7 +24,8 @@ class App extends Component {
 
   componentWillMount() {
     this.setState({
-      orgData:  Config.customConfiguration.orgData
+      orgData:  Config.customConfiguration.orgData,
+      linkList: Config.customConfiguration.linkData
     })
   };
 
@@ -56,7 +58,7 @@ class App extends Component {
     }).then(response => {
       if (response.ok) {
         return response.json()
-      } throw new Error('Doesnt look great')
+      } throw new Error('There was an issue requesting the API')
     }).then(json => {
       return json
     })
@@ -67,7 +69,7 @@ class App extends Component {
     let callPath = organization;
     this.swaggerhub('GET', callPath, callParams).then(response => {
       this.setState({
-        orgAPIData: response.apis
+        orgAPIList: response.apis
       })
     })
   }
@@ -81,14 +83,13 @@ class App extends Component {
     })
   }
 
-  getStaticFile(linkName) {
-    let filePath = require("./tutorial_links/" + (linkName.split(" ").join("_") + ".md").toLowerCase())
+  getStaticFile(filePath) {
+    let requiredFile = require("./Resources/sidebar/" + filePath)
 
-    fetch(filePath).then((response) => response.text()).then((text) => {
-      console.log(text)
+    fetch(requiredFile).then((response) => response.text()).then((text) => {
       this.setState({
         isDefinition: false,
-        tutorialText: text
+        linkData: text
       })
     })
   }
@@ -99,17 +100,18 @@ class App extends Component {
         <div className="page-body">
           <Sidebar
             orgData={this.state.orgData}
-            orgAPIData={this.state.orgAPIData}
+            orgAPIList={this.state.orgAPIList}
+            linkList={this.state.linkList}
             getOrganizationData={this.getOrganizationData}
             getAPIData={this.getAPIData}
             getStaticFile={this.getStaticFile}
           />
           <div className="docs-container">
-            <div id="docs"></div>
+            <div id="docs" />
           </div>
           <div className="markdown-container">
             <ReactMarkdown 
-              source={this.state.tutorialText}
+              source={this.state.linkData}
             />
           </div>
         </div>
