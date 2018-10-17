@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SwaggerUI from 'swagger-ui';
 import ReactMarkdown from 'react-markdown';
-import Config from './config.json';
+import Config from './Resources/config.json';
 import Sidebar from './Sidebar.js';
 import './App.css';
 
