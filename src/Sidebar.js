@@ -1,14 +1,18 @@
 import React from 'react';
+// import dir from 'node-dir';
 // import './Sidebar.css';
 import APILink from './APILink.js'
+import TutorialLink from './TutorialLink.js'
 
 const Sidebar = props => {
   let orgData = props.orgData;
   let orgAPIData = props.orgAPIData;
   let orgName = orgData.orgName
   let displayImage = orgData.displayImage
+  let tutorialList = ['How It Works', 'link 2']
   
   let APILinks = [];
+  let tutorialLinks = [];
 
   if (orgAPIData === null) {
     props.getOrganizationData(orgData.orgName)
@@ -24,6 +28,16 @@ const Sidebar = props => {
     }
   }
 
+  for (let n=0; n < tutorialList.length; n++) {
+    tutorialLinks.push(
+      <TutorialLink 
+        key={n}
+        linkName={tutorialList[n]}
+        getStaticFile={props.getStaticFile}
+      />
+    )
+  }
+
   return (
     <div className="side-bar">
       <header className="side-bar-header">
@@ -32,8 +46,7 @@ const Sidebar = props => {
       </header>
       <div className="side-bar-body">
         <h3 className="side-bar-title">TUTORIALS</h3>
-        <h4 className="api-link">How It Works</h4>
-        <h4 className="api-link">Demo Video</h4>
+        {tutorialLinks}
         <h3 className="side-bar-title">API DOCS</h3>
         {APILinks}
         <h3 className="side-bar-title">SANDBOX</h3>

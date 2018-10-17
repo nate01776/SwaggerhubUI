@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "node-dir": "^0.1.17",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-markdown": "^4.0.3",
     "react-scripts": "1.1.5",
     "swagger-ui": "3.19.1"
   },

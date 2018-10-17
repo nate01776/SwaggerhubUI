@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SwaggerUI from 'swagger-ui';
+import ReactMarkdown from 'react-markdown';
 import Config from './config.json';
 import Sidebar from './Sidebar.js';
 import './App.css';
@@ -8,14 +9,16 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // swaggerVersion: null,
+      isDefinition: false,
       orgData: null,
       orgAPIData: null,
       apiData: null,
+      tutorialText: null
     }
     this.swaggerhub = this.swaggerhub.bind(this)
     this.getOrganizationData = this.getOrganizationData.bind(this)
     this.getAPIData = this.getAPIData.bind(this)
+    this.getStaticFile = this.getStaticFile.bind(this)
   }
 
   componentWillMount() {
@@ -25,12 +28,19 @@ class App extends Component {
   };
 
   componentDidUpdate() {
-    SwaggerUI({
-      domNode: document.getElementById('docs'),
-      layout: "BaseLayout",
-      docExpansion: ["none"],
-      url: this.state.apiData
-    });
+    if (this.state.isDefinition) {
+      SwaggerUI({
+        domNode: document.getElementById('docs'),
+        layout: "BaseLayout",
+        docExpansion: ["none"],
+        url: this.state.apiData
+      });
+    } else {
+      // handle tutorial rendering
+      // fetch(howItWorks).then((response) => response.text()).then((text) => {
+      //   this.setState({tutorialText: text})
+      // })
+    }
   }
 
   swaggerhub(method, resource, params) {
@@ -66,7 +76,20 @@ class App extends Component {
     let apiURL = "https://api.swaggerhub.com/apis/" + apiLink
 
     this.setState({
+      isDefinition: true,
       apiData: apiURL
+    })
+  }
+
+  getStaticFile(linkName) {
+    let filePath = require("./tutorial_links/" + (linkName.split(" ").join("_") + ".md").toLowerCase())
+
+    fetch(filePath).then((response) => response.text()).then((text) => {
+      console.log(text)
+      this.setState({
+        isDefinition: false,
+        tutorialText: text
+      })
     })
   }
 
@@ -79,9 +102,15 @@ class App extends Component {
             orgAPIData={this.state.orgAPIData}
             getOrganizationData={this.getOrganizationData}
             getAPIData={this.getAPIData}
+            getStaticFile={this.getStaticFile}
           />
           <div className="docs-container">
             <div id="docs"></div>
+          </div>
+          <div className="markdown-container">
+            <ReactMarkdown 
+              source={this.state.tutorialText}
+            />
           </div>
         </div>
       </div>
