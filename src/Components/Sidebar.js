@@ -1,6 +1,7 @@
 import React from 'react';
 import APILink from '../Elements/APILink.js'
 import TutorialLink from '../Elements/TutorialLink.js'
+import './sidebar.css'
 
 const Sidebar = props => {
   let orgData = props.orgData;
@@ -48,7 +49,6 @@ const Sidebar = props => {
         {tutorialLinks}
         <h3 className="side-bar-title">API DOCS</h3>
         {APILinks}
-        <h3 className="side-bar-title">SANDBOX</h3>
       </div>
       <div className="side-bar-footer">
         <h4><a href="http://app.swaggerhub.com">POWERED BY SWAGGERHUB</a></h4>

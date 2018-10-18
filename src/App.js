@@ -3,7 +3,7 @@ import SwaggerUI from 'swagger-ui';
 import ReactMarkdown from 'react-markdown';
 import Config from './Resources/config.json';
 import Sidebar from './Components/Sidebar';
-import './App.css';
+import './app.css';
 
 class App extends Component {
   constructor(props) {
@@ -31,17 +31,21 @@ class App extends Component {
 
   componentDidUpdate() {
     if (this.state.isDefinition) {
+      this.setState.linkData = null
+
       SwaggerUI({
-        domNode: document.getElementById('docs'),
+        domNode: document.getElementById('apiData'),
         layout: "BaseLayout",
         docExpansion: ["none"],
         url: this.state.apiData
       });
     } else {
-      // handle tutorial rendering
-      // fetch(howItWorks).then((response) => response.text()).then((text) => {
-      //   this.setState({tutorialText: text})
-      // })
+      let swaggerToUnload = document.getElementsByClassName('swagger-ui')
+
+      if (swaggerToUnload.length > 0) {
+        swaggerToUnload[0].style.height = "0"
+        swaggerToUnload[0].style.visibility = "hidden"
+      }
     }
   }
 
@@ -79,22 +83,28 @@ class App extends Component {
 
     this.setState({
       isDefinition: true,
-      apiData: apiURL
+      apiData: apiURL,
+      linkData: null
     })
   }
 
   getStaticFile(filePath) {
     let requiredFile = require("./Resources/sidebar/" + filePath)
 
-    fetch(requiredFile).then((response) => response.text()).then((text) => {
+    fetch(
+      requiredFile
+    ).then(response => response.text()).then((text) => {
       this.setState({
         isDefinition: false,
+        apiData: null,
         linkData: text
       })
     })
   }
 
   render() {
+    let toShow = <ReactMarkdown source={this.state.linkData} />
+
     return (
       <div className="App">
         <div className="page-body">
@@ -107,12 +117,8 @@ class App extends Component {
             getStaticFile={this.getStaticFile}
           />
           <div className="docs-container">
-            <div id="docs" />
-          </div>
-          <div className="markdown-container">
-            <ReactMarkdown 
-              source={this.state.linkData}
-            />
+            <div id="apiData"></div>
+            {toShow}
           </div>
         </div>
       </div>

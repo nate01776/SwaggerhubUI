@@ -8,12 +8,16 @@
         },
         "linkData": [
             {
+                "displayName":"Home",
+                "resource":"home.md"
+            },
+            {
                 "displayName":"How It Works",
                 "resource":"how_it_works.md"
             },
             {
-                "displayName": "Other Links",
-                "resource": "other_links.md"
+                "displayName": "Image Test",
+                "resource": "image_test.md"
             }
         ]
     }
