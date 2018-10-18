@@ -1,0 +1,24 @@
+{
+    "customConfiguration": {
+        "orgData": {
+            "orgName": "SE-Design",
+            "displayName": "Documentation Demo",
+            "displayTag": "Demo documentation v1",
+            "displayImage": "https://seeklogo.com/images/H/high-tech-logo-74EC2A0344-seeklogo.com.gif"
+        },
+        "linkData": [
+            {
+                "displayName":"Home",
+                "resource":"home.md"
+            },
+            {
+                "displayName":"How It Works",
+                "resource":"how_it_works.md"
+            },
+            {
+                "displayName": "Image Test",
+                "resource": "image_test.md"
+            }
+        ]
+    }
+}

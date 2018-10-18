@@ -1,36 +1,52 @@
 import React, { Component } from 'react';
 import SwaggerUI from 'swagger-ui';
-import Config from './config.json';
-import Sidebar from './Sidebar.js';
-import './App.css';
+import ReactMarkdown from 'react-markdown';
+import Config from './Resources/config.json';
+import Sidebar from './Components/Sidebar';
+import './app.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // swaggerVersion: null,
+      isDefinition: false,
       orgData: null,
-      orgAPIData: null,
+      linkList: null,
+      orgAPIList: null,
       apiData: null,
+      linkData: null
     }
     this.swaggerhub = this.swaggerhub.bind(this)
     this.getOrganizationData = this.getOrganizationData.bind(this)
     this.getAPIData = this.getAPIData.bind(this)
+    this.getStaticFile = this.getStaticFile.bind(this)
   }
 
   componentWillMount() {
     this.setState({
-      orgData:  Config.customConfiguration.orgData
+      orgData:  Config.customConfiguration.orgData,
+      linkList: Config.customConfiguration.linkData
     })
   };
 
   componentDidUpdate() {
-    SwaggerUI({
-      domNode: document.getElementById('docs'),
-      layout: "BaseLayout",
-      docExpansion: ["none"],
-      url: this.state.apiData
-    });
+    if (this.state.isDefinition) {
+      this.setState.linkData = null
+
+      SwaggerUI({
+        domNode: document.getElementById('apiData'),
+        layout: "BaseLayout",
+        docExpansion: ["none"],
+        url: this.state.apiData
+      });
+    } else {
+      let swaggerToUnload = document.getElementsByClassName('swagger-ui')
+
+      if (swaggerToUnload.length > 0) {
+        swaggerToUnload[0].style.height = "0"
+        swaggerToUnload[0].style.visibility = "hidden"
+      }
+    }
   }
 
   swaggerhub(method, resource, params) {
@@ -46,7 +62,7 @@ class App extends Component {
     }).then(response => {
       if (response.ok) {
         return response.json()
-      } throw new Error('Doesnt look great')
+      } throw new Error('There was an issue requesting the API')
     }).then(json => {
       return json
     })
@@ -57,7 +73,7 @@ class App extends Component {
     let callPath = organization;
     this.swaggerhub('GET', callPath, callParams).then(response => {
       this.setState({
-        orgAPIData: response.apis
+        orgAPIList: response.apis
       })
     })
   }
@@ -66,22 +82,43 @@ class App extends Component {
     let apiURL = "https://api.swaggerhub.com/apis/" + apiLink
 
     this.setState({
-      apiData: apiURL
+      isDefinition: true,
+      apiData: apiURL,
+      linkData: null
+    })
+  }
+
+  getStaticFile(filePath) {
+    let requiredFile = require("./Resources/sidebar/" + filePath)
+
+    fetch(
+      requiredFile
+    ).then(response => response.text()).then((text) => {
+      this.setState({
+        isDefinition: false,
+        apiData: null,
+        linkData: text
+      })
     })
   }
 
   render() {
+    let toShow = <ReactMarkdown source={this.state.linkData} />
+
     return (
       <div className="App">
         <div className="page-body">
           <Sidebar
             orgData={this.state.orgData}
-            orgAPIData={this.state.orgAPIData}
+            orgAPIList={this.state.orgAPIList}
+            linkList={this.state.linkList}
             getOrganizationData={this.getOrganizationData}
             getAPIData={this.getAPIData}
+            getStaticFile={this.getStaticFile}
           />
           <div className="docs-container">
-            <div id="docs"></div>
+            <div id="apiData"></div>
+            {toShow}
           </div>
         </div>
       </div>
