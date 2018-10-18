@@ -3,7 +3,7 @@ import SwaggerUI from 'swagger-ui';
 import ReactMarkdown from 'react-markdown';
 import Config from './Resources/config.json';
 import Sidebar from './Components/Sidebar';
-import './app.css';
+import './App.css';
 
 class App extends Component {
   constructor(props) {
