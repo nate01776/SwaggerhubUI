@@ -1,7 +1,7 @@
 import React from 'react';
 import APILink from '../Elements/APILink.js'
 import TutorialLink from '../Elements/TutorialLink.js'
-import './sidebar.css'
+import './Sidebar.css'
 
 const Sidebar = props => {
   let orgData = props.orgData;
