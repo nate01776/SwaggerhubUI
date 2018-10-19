@@ -27,6 +27,12 @@ class App extends Component {
       orgData:  Config.customConfiguration.orgData,
       linkList: Config.customConfiguration.linkData
     })
+    
+    let startPage = Config.customConfiguration.orgData.startPage
+
+    if (startPage !== "" || startPage !== null) {
+      this.getStaticFile(startPage)
+    }
   };
 
   componentDidUpdate() {
