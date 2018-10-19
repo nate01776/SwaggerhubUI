@@ -64,7 +64,10 @@ class App extends Component {
     }
 
     return fetch(url, {
-        method: method
+        method: method,
+        headers: {
+          "Authorization": "16712792-8527-490b-bc66-83edafb747bc"
+        }
     }).then(response => {
       if (response.ok) {
         return response.json()
@@ -85,13 +88,20 @@ class App extends Component {
   }
 
   getAPIData(apiLink) {
-    let apiURL = "https://api.swaggerhub.com/apis/" + apiLink
-
-    this.setState({
-      isDefinition: true,
-      apiData: apiURL,
-      linkData: null
+    // CONVERT TO JSON
+    this.swaggerhub('GET', apiLink).then(response => {
+      this.setState({
+        isDefinition: true,
+        apiData: response,
+        linkData: null
+      })
     })
+
+    // this.setState({
+    //   isDefinition: true,
+    //   apiData: apiURL,
+    //   linkData: null
+    // })
   }
 
   getStaticFile(filePath) {
