@@ -66,7 +66,7 @@ class App extends Component {
     return fetch(url, {
         method: method,
         headers: {
-          "Authorization": process.env.SWAGGERHUB_TOKEN
+          "Authorization": process.env.REACT_APP_SWAGGERHUB_TOKEN
         }
     }).then(response => {
       if (response.ok) {
