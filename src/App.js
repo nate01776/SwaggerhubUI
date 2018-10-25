@@ -64,7 +64,10 @@ class App extends Component {
     }
 
     return fetch(url, {
-        method: method
+        method: method,
+        headers: {
+          "Authorization": process.env.SWAGGERHUB_TOKEN
+        }
     }).then(response => {
       if (response.ok) {
         return response.json()
@@ -77,6 +80,7 @@ class App extends Component {
   getOrganizationData(organization) {
     let callParams = "page=0&limit=20&sort=NAME&order=ASC"
     let callPath = organization;
+
     this.swaggerhub('GET', callPath, callParams).then(response => {
       this.setState({
         orgAPIList: response.apis
@@ -85,14 +89,28 @@ class App extends Component {
   }
 
   getAPIData(apiLink) {
-    let apiURL = "https://api.swaggerhub.com/apis/" + apiLink
-
-    this.setState({
-      isDefinition: true,
-      apiData: apiURL,
-      linkData: null
+    // CONVERT TO JSON
+    this.swaggerhub('GET', apiLink).then(response => {
+      this.setState({
+        isDefinition: true,
+        apiData: response,
+        linkData: null
+      })
     })
+
+    // this.setState({
+    //   isDefinition: true,
+    //   apiData: apiURL,
+    //   linkData: null
+    // })
   }
+
+    // updateApiLink(apiLink) {
+  //  // Set the state with the new API location
+  //   this.setState({
+  //     definitionLink: apiLink
+  //   })
+  // }
 
   getStaticFile(filePath) {
     let requiredFile = require("./Resources/sidebar/" + filePath)
