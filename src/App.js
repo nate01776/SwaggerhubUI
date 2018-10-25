@@ -62,7 +62,7 @@ class App extends Component {
     } else {
       url = "https://api.swaggerhub.com/apis/" + resource
     }
-    console.log(process.env.REACT_APP_SWAGGERHUB_TOKEN)
+
     return fetch(url, {
         method: method,
         headers: {
