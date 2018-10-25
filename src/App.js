@@ -66,7 +66,7 @@ class App extends Component {
     return fetch(url, {
         method: method,
         headers: {
-          "Authorization": "16712792-8527-490b-bc66-83edafb747bc"
+          "Authorization": process.env.SWAGGERHUB_TOKEN
         }
     }).then(response => {
       if (response.ok) {
@@ -80,6 +80,7 @@ class App extends Component {
   getOrganizationData(organization) {
     let callParams = "page=0&limit=20&sort=NAME&order=ASC"
     let callPath = organization;
+
     this.swaggerhub('GET', callPath, callParams).then(response => {
       this.setState({
         orgAPIList: response.apis
@@ -103,6 +104,13 @@ class App extends Component {
     //   linkData: null
     // })
   }
+
+    // updateApiLink(apiLink) {
+  //  // Set the state with the new API location
+  //   this.setState({
+  //     definitionLink: apiLink
+  //   })
+  // }
 
   getStaticFile(filePath) {
     let requiredFile = require("./Resources/sidebar/" + filePath)
